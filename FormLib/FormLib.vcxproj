@@ -43,7 +43,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -142,6 +142,7 @@
     <ClCompile Include="IColorfulOut.cpp" />
     <ClCompile Include="IControl.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Progress.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="utils.h" />
@@ -155,7 +156,9 @@
     <ClInclude Include="IColorfulOut.h" />
     <ClInclude Include="IControl.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Progress.h" />
     <ClInclude Include="Res.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Size.h" />

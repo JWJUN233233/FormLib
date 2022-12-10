@@ -12,7 +12,7 @@ class Point
 		void SetPoint(Point point);
 		void SetPoint(int x,int y);
 		void PrintPoint();
-	//private:
+	private:
 		int _x;
 		int _y;
 };

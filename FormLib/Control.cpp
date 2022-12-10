@@ -12,20 +12,11 @@ void FormLib::Control::Hide()
 {
 }
 
-void FormLib::Control::onFormCommand(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
-{
-
-}
-
-void FormLib::Control::Destroy()
+void FormLib::Control::setText(achar* Text)
 {
 }
 
-void FormLib::Control::setText(std::string Text)
-{
-}
-
-void FormLib::Control::getText(char** out)
+void FormLib::Control::getText(achar* out)
 {
 
 }
@@ -44,3 +35,12 @@ bool FormLib::Control::isEnable()
 {
 	return false;
 }
+
+void FormLib::Control::Destroy()
+{
+}
+
+void FormLib::Control::onFormCommand(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
+{
+}
+

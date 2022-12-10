@@ -5,9 +5,9 @@ namespace FormLib {
 		Proc = proc;
 		Id = id;
 	}
-	void FormListener::call(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
+	int FormListener::call(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 	{
-		Proc(hwnd, Message, wParam, lParam);
+		return Proc(hwnd, Message, wParam, lParam);
 	}
 	char* FormListener::getId()
 	{

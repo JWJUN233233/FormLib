@@ -6,7 +6,7 @@ namespace FormLib {
 	{
 	public:
 		FormListener(WNDPROC proc, char* id);
-		void call(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
+		int call(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
 		WNDPROC Proc;
 		char* Id;
 		char* getId();
