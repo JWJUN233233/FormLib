@@ -19,8 +19,8 @@ namespace FormLib {
         void setSize(Size size);
         Point getPoint();
         Size getSize();
-        void setText(achar* Text);
-        void getText(achar* out);
+        void setText(Achar* Text);
+        void getText(Achar* out);
         void setEnable(bool enable);
         bool isEnable();
         int getID();

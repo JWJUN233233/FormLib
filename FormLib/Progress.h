@@ -22,14 +22,14 @@ namespace FormLib {
         /*PBST_NORMAL为正常， PBST_ERROR为错误， PBST_PAUSED为暂停*/
         void setState(int state);
         /*PBST_NORMAL为正常， PBST_ERROR为错误， PBST_PAUSED为暂停*/
-        int getState(int state);
+        int getState();
         void step();
         void back();
         void add(int pos);
         Point getPoint();
         Size getSize();
-        void setText(achar* Text);
-        void getText(achar* out);
+        void setText(Achar* Text);
+        void getText(Achar* out);
         void setEnable(bool enable);
         bool isEnable();
         int getID();

@@ -1,7 +1,33 @@
-﻿  FormLib.cpp
+﻿  Button.cpp
+C:\Users\Ddggd\Desktop\c++\FormLib\Button.cpp(19,1): warning C4312: “类型强制转换”: 从“int”转换到更大的“HMENU”
+  Control.cpp
+  Form.cpp
+  FormLib.cpp
+  FormListener.cpp
+C:\Users\Ddggd\Desktop\c++\FormLib\FormListener.cpp(10,14): warning C4244: “return”: 从“LRESULT”转换到“int”，可能丢失数据
+  IColorfulOut.cpp
+  IControl.cpp
+  Menu.cpp
+C:\Users\Ddggd\Desktop\c++\FormLib\Menu.cpp(27,56): warning C4311: “类型强制转换”: 从“HMENU”到“UINT”的指针截断
+C:\Users\Ddggd\Desktop\c++\FormLib\Menu.cpp(27,56): warning C4302: “类型强制转换”: 从“HMENU”到“UINT”截断
+C:\Users\Ddggd\Desktop\c++\FormLib\Menu.cpp(53,65): warning C4311: “类型强制转换”: 从“HMENU”到“UINT”的指针截断
+C:\Users\Ddggd\Desktop\c++\FormLib\Menu.cpp(53,65): warning C4302: “类型强制转换”: 从“HMENU”到“UINT”截断
+C:\Users\Ddggd\Desktop\c++\FormLib\Menu.cpp(91,78): warning C4311: “类型强制转换”: 从“HMENU”到“UINT”的指针截断
+C:\Users\Ddggd\Desktop\c++\FormLib\Menu.cpp(91,78): warning C4302: “类型强制转换”: 从“HMENU”到“UINT”截断
+C:\Users\Ddggd\Desktop\c++\FormLib\Menu.cpp(118,39): warning C4311: “类型强制转换”: 从“HMENU”到“UINT”的指针截断
+C:\Users\Ddggd\Desktop\c++\FormLib\Menu.cpp(118,39): warning C4302: “类型强制转换”: 从“HMENU”到“UINT”截断
+  Painter.cpp
+  Point.cpp
   Progress.cpp
 C:\Users\Ddggd\Desktop\c++\FormLib\Progress.cpp(19,1): warning C4312: “类型强制转换”: 从“int”转换到更大的“HMENU”
 C:\Users\Ddggd\Desktop\c++\FormLib\Progress.cpp(70,20): warning C4244: “return”: 从“LRESULT”转换到“int”，可能丢失数据
 C:\Users\Ddggd\Desktop\c++\FormLib\Progress.cpp(83,20): warning C4244: “return”: 从“LRESULT”转换到“int”，可能丢失数据
+  Size.cpp
+  utils.cpp
+C:\Users\Ddggd\Desktop\c++\FormLib\utils.cpp(10,82): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\Ddggd\Desktop\c++\FormLib\utils.cpp(17,89): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\Ddggd\Desktop\c++\FormLib\utils.cpp(22,82): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\Ddggd\Desktop\c++\FormLib\utils.cpp(23,75): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+  utils.h
   正在生成代码...
   FormLib.vcxproj -> C:\Users\Ddggd\Desktop\c++\FormLib\x64\Debug\FormLib.exe

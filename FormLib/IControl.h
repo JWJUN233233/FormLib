@@ -8,7 +8,25 @@
 using namespace DG_CoreLib;
 extern int NextControlid;
 namespace FormLib {
+	class IEvent;
+	typedef void (*EventProc)(IEvent*);
 	class Form;
+	class MenuNode;
+	class IMenu {
+		friend class Form;
+	public:
+		virtual HMENU getHMENU() = 0;
+		virtual MenuNode* addMenu(Achar* Text, DWORD sytle = MF_STRING) = 0;
+		virtual MenuNode* insertMenu(Achar* Text, int location, DWORD sytle = MF_STRING) = 0;
+		virtual void removeMenu(MenuNode* node) = 0;
+		virtual void removeMenu(int id) = 0;
+		virtual MenuNode* getNode(int id) = 0;
+		virtual Form* getOwner() = 0;
+		virtual void setEventListener(EventProc Listener) = 0;
+	private:
+		virtual void setOwner(Form* owner) = 0;
+		virtual void onFormCommand(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) = 0;
+	};;
 	class IControl
 	{
 		friend class Form;
@@ -18,8 +36,8 @@ namespace FormLib {
 		virtual void onCreate(HWND hwnd) = 0;
 		virtual void Show() = 0;
 		virtual void Hide() = 0;
-		virtual void setText(achar* Text) = 0;
-		virtual void getText(achar* out) = 0;
+		virtual void setText(Achar* Text) = 0;
+		virtual void getText(Achar* out) = 0;
 		virtual void setEnable(bool enable) = 0;
 		virtual bool isEnable() = 0;
 		virtual int getID() = 0;
@@ -46,7 +64,6 @@ namespace FormLib {
 	private:
 		bool Cancel;
 	};
-	typedef void (*EventProc)(IEvent*);
 	class Event : public IEvent {
 	public:
 		void getEventType(char* out) {
@@ -198,7 +215,23 @@ namespace FormLib {
 		Point CursorONForm;
 		IControl* owner;
 	};
-	inline void EmptyEvent(FormLib::IEvent* e) {
-
-	}
+	class MenuClickEvent : public IEvent {
+	public:
+		MenuClickEvent(HWND Hwnd, IMenu* Owner,int Id) {
+			hwnd = Hwnd;
+			owner = Owner;
+			id = Id;
+		};
+		void getEventType(char* out) {
+			sprintf_s(out, MAX_PATH, "MenuClickEvent");
+		};
+		int getId();
+		IMenu* getOwner();
+		MenuNode* getNode();
+	private:
+		HWND hwnd;
+		IMenu* owner;
+		int id;
+	};
+	inline void EmptyEvent(FormLib::IEvent* e) {}
 }

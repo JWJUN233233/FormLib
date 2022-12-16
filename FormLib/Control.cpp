@@ -12,11 +12,11 @@ void FormLib::Control::Hide()
 {
 }
 
-void FormLib::Control::setText(achar* Text)
+void FormLib::Control::setText(Achar* Text)
 {
 }
 
-void FormLib::Control::getText(achar* out)
+void FormLib::Control::getText(Achar* out)
 {
 
 }

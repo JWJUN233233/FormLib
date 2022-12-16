@@ -9,8 +9,9 @@ using namespace FormLib;
 using namespace std;
 LRESULT WINAPI FormWinProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 std::map<HWND, Form*> hwnd_Form;
-Form::Form(DG_CoreLib::Point location, DG_CoreLib::Size size, achar* _Caption)
+Form::Form(DG_CoreLib::Point location, DG_CoreLib::Size size, Achar* _Caption, DWORD sytle)
 {
+	menu = nullptr;
 	_point = location;
 	_size = size;
 	Caption = _Caption;
@@ -19,7 +20,7 @@ Form::Form(DG_CoreLib::Point location, DG_CoreLib::Size size, achar* _Caption)
 	hwnd = CreateWindowEx(WS_EX_CLIENTEDGE,
 		_T("FormLib"),
 		Caption,
-		WS_OVERLAPPEDWINDOW,
+		sytle,
 		_point.GetX(), _point.GetY(),
 		_size.GetW(), _size.GetH(),
 		NULL, NULL, GetModuleHandle(0), (LPVOID)this);
@@ -68,7 +69,7 @@ Size FormLib::Form::getSize()
 {
 	return _size;
 }
-void Form::SetCaption(achar* _Caption){
+void Form::SetCaption(Achar* _Caption){
 	Caption = _Caption;
 }
 void FormLib::Form::addListener(FormListener _listener)
@@ -87,15 +88,29 @@ void FormLib::Form::setBigIcon(HICON icon)
 }
 void FormLib::Form::addControl(IControl* control)
 {
+	if (control->getOwner() != NULL) {
+		return;
+	}
 	control -> onCreate(hwnd);
 	control -> setOwner(this);
 	controls.push_back(control);
 }
 void FormLib::Form::removeControl(IControl* control)
 {
+	if (control->getOwner() == NULL) {
+		return;
+	}
 	control->Destroy();
 	control->setOwner(NULL);
 	controls.remove(control);
+}
+void FormLib::Form::addPainter(Painter* painter)
+{
+	painters.push_back(painter);
+}
+void FormLib::Form::removePainter(Painter* painter)
+{
+	painters.remove(painter);
 }
 void FormLib::Form::ShowDialog(HWND dialog)
 {
@@ -103,8 +118,52 @@ void FormLib::Form::ShowDialog(HWND dialog)
 void FormLib::Form::ShowDialog(Form dialog)
 {
 }
+void FormLib::Form::setSytle(DWORD sytle)
+{
+	SetWindowLong(hwnd, GWL_STYLE, sytle);
+}
+void FormLib::Form::setMenu(IMenu* menu)
+{
+	SetMenu(hwnd, menu->getHMENU());
+	this->menu = menu;
+	menu->setOwner(this);
+	updata();
+}
+IMenu* FormLib::Form::getMenu()
+{
+	return menu;
+}
+void FormLib::Form::removeMenu()
+{
+	SetMenu(hwnd, NULL);
+	menu->setOwner(nullptr);
+	this->menu = nullptr;
+}
+void FormLib::Form::updata()
+{
+	UpdateWindow(hwnd);
+	DrawMenuBar(hwnd);
+}
+DWORD FormLib::Form::getSytle()
+{
+	return GetWindowLong(hwnd, GWL_STYLE);
+}
 HWND Form::GetHWND(){
 	return hwnd;
+}
+void FormLib::Form::setTaskBar(bool isenable)
+{
+	DWORD oldSytle = GetWindowLong(hwnd, GWL_EXSTYLE);
+	if (!isenable) {
+		SetWindowLong(hwnd, GWL_EXSTYLE, oldSytle | WS_EX_TOOLWINDOW);
+	}
+	else {
+		SetWindowLong(hwnd, GWL_EXSTYLE, oldSytle & WS_EX_TOOLWINDOW & NULL);
+	}
+}
+bool FormLib::Form::isShowInTaskBar()
+{
+	return GetWindowLong(hwnd, GWL_EXSTYLE) == WS_EX_TOOLWINDOW;
 }
 Form* FormLib::Form::FromHWND(HWND hwnd)
 {
@@ -145,7 +204,6 @@ LRESULT FormLib::Form::WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lP
 		xPos = (int)(short)LOWORD(lParam);
 		yPos = (int)(short)HIWORD(lParam);
 		_point.SetPoint(xPos, yPos);
-		//RedOut << xPos << "," << yPos << "\n";
 		break;
 	case WM_SIZE:
 		int h;
@@ -154,9 +212,21 @@ LRESULT FormLib::Form::WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lP
 		h = (int)(short)HIWORD(lParam);
 		_size.SetSize(w, h);
 		break;
+	case WM_PAINT:
+		PAINTSTRUCT ps;
+		HDC hdc;
+		hdc = BeginPaint(hwnd, &ps);
+		for (auto& i : painters) {
+			i->_drawer(hdc, hwnd);
+		}
+		EndPaint(hwnd, &ps);
+		break;
 	case WM_COMMAND:
 		for (auto& i : controls) {
 			i -> onFormCommand(hwnd, Message, wParam, lParam);
+		}
+		if (menu != nullptr) {
+			menu->onFormCommand(hwnd, Message, wParam, lParam);
 		}
 		break;
 	case WM_NOTIFY:
@@ -185,4 +255,3 @@ LRESULT WINAPI FormWinProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam
 	}
 	return DefWindowProc(hwnd, message, wParam, lParam);
 }
-

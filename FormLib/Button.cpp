@@ -51,11 +51,11 @@ Size FormLib::Button::getSize()
 {
 	return _size;
 }
-void FormLib::Button::setText(achar* Text)
+void FormLib::Button::setText(Achar* Text)
 {
 	SetWindowText(handle, Text);
 }
-void FormLib::Button::getText(achar* out)
+void FormLib::Button::getText(Achar* out)
 {
 	GetWindowText(handle, out, MAX_PATH);
 }
@@ -86,10 +86,12 @@ void FormLib::Button::onFormCommand(HWND hwnd, UINT Message, WPARAM wParam, LPAR
 		Form* owner = getOwner();
 		Point p = owner->getPoint();
 		IEvent* e = nullptr;
-		if (((LPNMHDR)lParam)->idFrom == controlID) {
-			switch (((LPNMHDR)lParam)->code) {
+		LPNMHDR tmp = (LPNMHDR)lParam;
+		if (tmp->idFrom == controlID) {
+			switch (tmp->code) {
 			case BCN_HOTITEMCHANGE:
 				NMBCHOTITEM* pnmbchotitem = (NMBCHOTITEM*)lParam;
+				pnmbchotitem->dwFlags = pnmbchotitem->dwFlags - 1;
 				if (pnmbchotitem->dwFlags == HICF_LEAVING) {
 					e = new CursorLeavingEvent(hwnd, p, this);
 					listener(e);

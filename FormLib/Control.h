@@ -9,8 +9,8 @@ public:
 	void onCreate(HWND hwnd);
 	void Show();
 	void Hide();
-	void setText(achar* Text);
-	void getText(achar* out);
+	void setText(Achar* Text);
+	void getText(Achar* out);
 	void setEnable(bool enable);
 	int getID();
 	bool isEnable();

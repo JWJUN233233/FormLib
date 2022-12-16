@@ -51,6 +51,12 @@
     <ClCompile Include="Progress.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Painter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="class.h">
@@ -93,6 +99,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Progress.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Painter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

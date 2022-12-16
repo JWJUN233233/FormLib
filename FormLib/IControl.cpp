@@ -117,4 +117,16 @@ namespace FormLib {
 	{
 		return owner;
 	}
+	int MenuClickEvent::getId()
+	{
+		return id;
+	}
+	IMenu* MenuClickEvent::getOwner()
+	{
+		return owner;
+	}
+	MenuNode* MenuClickEvent::getNode()
+	{
+		return owner->getNode(id);
+	}
 }

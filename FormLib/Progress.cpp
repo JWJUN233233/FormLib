@@ -78,7 +78,7 @@ void FormLib::Progress::setState(int state)
 {
 	SendMessage(handle, PBM_SETSTATE, state, (LPARAM)0);
 }
-int FormLib::Progress::getState(int state)
+int FormLib::Progress::getState()
 {
 	return SendMessage(handle, PBM_GETSTATE, (WPARAM)0, (LPARAM)0);
 }
@@ -92,7 +92,7 @@ void FormLib::Progress::back()
 }
 void FormLib::Progress::add(int pos)
 {
-	SendMessage(handle, PBM_DELTAPOS, //设置进度条的新位置为当前位置加上范围的1/20
+	SendMessage(handle, PBM_DELTAPOS,
 		(WPARAM)(pos), (LPARAM)0);
 }
 Point FormLib::Progress::getPoint()
@@ -103,11 +103,11 @@ Size FormLib::Progress::getSize()
 {
 	return _size;
 }
-void FormLib::Progress::setText(achar* Text)
+void FormLib::Progress::setText(Achar* Text)
 {
 	SetWindowText(handle, Text);
 }
-void FormLib::Progress::getText(achar* out)
+void FormLib::Progress::getText(Achar* out)
 {
 	GetWindowText(handle, out, MAX_PATH);
 }
