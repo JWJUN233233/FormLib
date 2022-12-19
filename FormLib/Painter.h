@@ -3,7 +3,7 @@
 #include <Windows.h>
 namespace FormLib {
 	typedef void (*Drawer)(HDC, HWND);
-	class Painter
+	class DLL Painter
 	{
 		friend class Form;
 	public:

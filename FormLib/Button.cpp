@@ -1,6 +1,5 @@
 #include "Button.h"
-#include<string>
-#include "IColorfulOut.h"
+
 using namespace FormLib;
 FormLib::Button::Button(Point point, Size size, DWORD sytle)
 {
@@ -19,14 +18,14 @@ void FormLib::Button::onCreate(HWND hwnd)
 		hwnd, (HMENU)NextControlid, GetModuleHandle(0), NULL);
 	controlID = NextControlid;
 	NextControlid++;
-	Show();
+	show();
 }
-void FormLib::Button::Show()
+void FormLib::Button::show()
 {
 	ShowWindow(handle, SW_SHOW);
 	UpdateWindow(handle);
 }
-void FormLib::Button::Hide()
+void FormLib::Button::hide()
 {
 	ShowWindow(handle, SW_HIDE);
 	UpdateWindow(handle);
@@ -61,7 +60,7 @@ void FormLib::Button::getText(Achar* out)
 }
 void FormLib::Button::onFormCommand(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 {
-	if (Message == WM_COMMAND) {
+		if (Message == WM_COMMAND) {
 		int id = LOWORD(wParam);
 		if (id == controlID) {
 			Form* owner = getOwner();
@@ -88,10 +87,10 @@ void FormLib::Button::onFormCommand(HWND hwnd, UINT Message, WPARAM wParam, LPAR
 		IEvent* e = nullptr;
 		LPNMHDR tmp = (LPNMHDR)lParam;
 		if (tmp->idFrom == controlID) {
+			NMBCHOTITEM* pnmbchotitem = (NMBCHOTITEM*)lParam;
+			pnmbchotitem->dwFlags = pnmbchotitem->dwFlags - 1;
 			switch (tmp->code) {
 			case BCN_HOTITEMCHANGE:
-				NMBCHOTITEM* pnmbchotitem = (NMBCHOTITEM*)lParam;
-				pnmbchotitem->dwFlags = pnmbchotitem->dwFlags - 1;
 				if (pnmbchotitem->dwFlags == HICF_LEAVING) {
 					e = new CursorLeavingEvent(hwnd, p, this);
 					listener(e);
@@ -102,11 +101,18 @@ void FormLib::Button::onFormCommand(HWND hwnd, UINT Message, WPARAM wParam, LPAR
 					listener(e);
 					delete e;
 				}
+				break;
 			}
 		}
 	}
+	if (Message == SET_FOCUS) {
+		//setSytle(_sytle | BS_DEFPUSHBUTTON);
+	}
+	if (Message == KILL_FOCUS) {
+		//setSytle(_sytle | BS_PUSHBUTTON & BS_DEFPUSHBUTTON);
+	}
 }
-void FormLib::Button::Destroy()
+void FormLib::Button::destroy()
 {
 	DestroyWindow(handle);
 }
@@ -114,12 +120,12 @@ void FormLib::Button::setEnable(bool enable)
 {
 	Button_Enable(handle, enable);
 	if (enable) {
-		ButtonEnableEvent* e = new ButtonEnableEvent(getOwner()->GetHWND(), getOwner()->getPoint(), this);
+		EnableEvent* e = new EnableEvent(getOwner()->GetHWND(), getOwner()->getPoint(), this);
 		listener(e);
 		delete e;
 	}
 	else {
-		ButtonDisableEvent* e = new ButtonDisableEvent(getOwner()->GetHWND(), getOwner()->getPoint(), this);
+		DisableEvent* e = new DisableEvent(getOwner()->GetHWND(), getOwner()->getPoint(), this);
 		listener(e);
 		delete e;
 	}
@@ -131,6 +137,18 @@ bool FormLib::Button::isEnable()
 int FormLib::Button::getID()
 {
 	return controlID;
+}
+HWND FormLib::Button::getHWND()
+{
+	return handle;
+}
+DWORD FormLib::Button::getSytle()
+{
+	return GetWindowLong(handle, GWL_STYLE);
+}
+void FormLib::Button::setSytle(DWORD sytle)
+{
+	SetWindowLong(handle, GWL_STYLE, sytle);
 }
 void FormLib::Button::setEventListener(EventProc Listener)
 {

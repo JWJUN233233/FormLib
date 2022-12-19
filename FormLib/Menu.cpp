@@ -160,6 +160,12 @@ void Menu::onFormCommand(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 			if (i->id == id) {
 				MenuClickEvent* e = new MenuClickEvent(hwnd, this, id);
 				listener(e);
+				MenuNode* node = e->getNode();
+				if (node->isCheckBox()) {
+					if (!e->isCancel()) {
+						node->setIsCheck(!node->isCheck());
+					}
+				}
 				delete e;
 				return;
 			}
@@ -174,6 +180,7 @@ MenuNode::MenuNode(HMENU _parent, Achar* _Text, DWORD _sytle, bool isPopupMenu)
 	sytle = _sytle;
 	IsPopupMenu = isPopupMenu;
 	Text = _Text;
+	IsCheckBox = false;
 }
 MenuNode::~MenuNode()
 {
@@ -181,13 +188,66 @@ MenuNode::~MenuNode()
 }
 void MenuNode::setText(Achar* _Text)
 {
-	ModifyMenu(parent, id, sytle, id, _Text);
+	DWORD Flag = GetMenuState(parent, id, MF_BYCOMMAND);
+	ModifyMenu(parent, id, Flag, id, _Text);
 	Text = _Text;
 }
 void FormLib::MenuNode::setPopupText(HMENU _parent, Achar* _Text)
 {
-	ModifyMenu(_parent, id, sytle, id, _Text);
+	DWORD Flag = GetMenuState(parent, id, MF_BYCOMMAND);
+	ModifyMenu(_parent, id, Flag, id, _Text);
 	Text = _Text;
+}
+void FormLib::MenuNode::setIsCheckBox(bool isCheckBox)
+{
+	DWORD Flag = GetMenuState(parent, id, MF_BYCOMMAND);
+	if (isCheckBox) {
+		ModifyMenu(parent, id, Flag | MF_CHECKED, id, Text);
+	}
+	else {
+		ModifyMenu(parent, id, Flag, id, Text);
+	}
+	IsCheckBox = isCheckBox;
+}
+bool FormLib::MenuNode::isCheckBox()
+{
+	return IsCheckBox;
+}
+void FormLib::MenuNode::setIsCheck(bool isCheck)
+{
+	DWORD Flag = GetMenuState(parent, id, MF_BYCOMMAND);
+	if (isCheck and !(Flag & MF_CHECKED)) {
+		ModifyMenu(parent, id, Flag | MF_CHECKED, id, Text);
+	}
+	else {
+		if (Flag & MF_CHECKED) {
+			ModifyMenu(parent, id, Flag ^ MF_CHECKED | MF_UNCHECKED, id, Text);
+		}
+	}
+}
+bool FormLib::MenuNode::isCheck()
+{
+	DWORD Flag = GetMenuState(parent, id, MF_BYCOMMAND);
+	return (Flag & MF_CHECKED);
+}
+void FormLib::MenuNode::setEnable(bool isEnable)
+{
+	DWORD Flag = GetMenuState(parent, id, MF_BYCOMMAND);
+	if (isEnable) {
+		if (Flag & (MF_DISABLED | MF_GRAYED)) {
+			ModifyMenu(parent, id, Flag ^ MF_DISABLED | MF_ENABLED, id, Text);
+		}
+	}
+	else {
+		if (!(Flag & (MF_DISABLED | MF_GRAYED))) {
+			ModifyMenu(parent, id, Flag ^ MF_ENABLED | MF_DISABLED, id, Text);
+		}
+	}
+}
+bool FormLib::MenuNode::isEnable()
+{
+	DWORD Flag = GetMenuState(parent, id, MF_BYCOMMAND);
+	return Flag & MF_ENABLED;
 }
 void MenuNode::getText(Achar* out)
 {

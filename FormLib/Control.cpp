@@ -4,11 +4,11 @@ void FormLib::Control::onCreate(HWND hwnd)
 {
 }
 
-void FormLib::Control::Show()
+void FormLib::Control::show()
 {
 }
 
-void FormLib::Control::Hide()
+void FormLib::Control::hide()
 {
 }
 
@@ -36,7 +36,7 @@ bool FormLib::Control::isEnable()
 	return false;
 }
 
-void FormLib::Control::Destroy()
+void FormLib::Control::destroy()
 {
 }
 

@@ -1,8 +1,8 @@
 #pragma once
 #include <Windows.h>
-
+#include "pch.h"
 namespace FormLib {
-	class FormListener
+	class DLL FormListener
 	{
 	public:
 		FormListener(WNDPROC proc, char* id);

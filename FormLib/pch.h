@@ -2,6 +2,11 @@
 #include <tchar.h>
 #include "IColorfulOut.h"
 using namespace std;
+#define SET_FOCUS 2001
+#define KILL_FOCUS 2002
+#define DLL
+#define and &&
+#define or ||
 #ifdef UNICODE
 #define Achar wchar_t
 #define Astring wstring

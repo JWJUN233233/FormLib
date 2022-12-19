@@ -1,7 +1,7 @@
-#ifndef SIZE_H
-#define SIZE_H
+#pragma once
+#include "pch.h"
 namespace DG_CoreLib{
-class Size
+class DLL Size
 {
 	public:
 		Size(int w, int h);
@@ -14,4 +14,3 @@ class Size
 		int _h;
 };
 }
-#endif

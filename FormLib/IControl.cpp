@@ -21,11 +21,11 @@ namespace FormLib {
 	{
 		return CursorPoint;
 	}
-	Point ButtonClickEvent::getCuosorONForm()
+	Point ButtonClickEvent::getCursorONForm()
 	{
 		return CursorONForm;
 	}
-	Point ButtonClickEvent::getCuosorONButton()
+	Point ButtonClickEvent::getCursorONButton()
 	{
 		return CursorONButton;
 	}
@@ -37,11 +37,11 @@ namespace FormLib {
 	{
 		return CursorPoint;
 	}
-	Point CursorEnteringEvent::getCuosorONForm()
+	Point CursorEnteringEvent::getCursorONForm()
 	{
 		return CursorONForm;
 	}
-	Point CursorEnteringEvent::getCuosorONButton()
+	Point CursorEnteringEvent::getCursorONButton()
 	{
 		return CursorONButton;
 	}
@@ -69,7 +69,7 @@ namespace FormLib {
 	{
 		return CursorPoint;
 	}
-	Point CursorLeavingEvent::getCuosorONForm()
+	Point CursorLeavingEvent::getCursorONForm()
 	{
 		return CursorONForm;
 	}
@@ -77,27 +77,27 @@ namespace FormLib {
 	{
 		return owner;
 	}
-	Point ButtonDisableEvent::getCursorPoint()
+	Point DisableEvent::getCursorPoint()
 	{
 		return CursorPoint;
 	}
-	Point ButtonDisableEvent::getCuosorONForm()
+	Point DisableEvent::getCursorONForm()
 	{
 		return CursorONForm;
 	}
-	IControl* ButtonDisableEvent::getOwner()
+	IControl* DisableEvent::getOwner()
 	{
 		return owner;
 	}
-	Point ButtonEnableEvent::getCursorPoint()
+	Point EnableEvent::getCursorPoint()
 	{
 		return CursorPoint;
 	}
-	Point ButtonEnableEvent::getCuosorONForm()
+	Point EnableEvent::getCursorONForm()
 	{
 		return CursorONForm;
 	}
-	IControl* ButtonEnableEvent::getOwner()
+	IControl* EnableEvent::getOwner()
 	{
 		return owner;
 	}
@@ -105,11 +105,11 @@ namespace FormLib {
 	{
 		return CursorPoint;
 	}
-	Point ButtonDoubleClickEvent::getCuosorONForm()
+	Point ButtonDoubleClickEvent::getCursorONForm()
 	{
 		return CursorONForm;
 	}
-	Point ButtonDoubleClickEvent::getCuosorONButton()
+	Point ButtonDoubleClickEvent::getCursorONButton()
 	{
 		return CursorONButton;
 	}
@@ -128,5 +128,21 @@ namespace FormLib {
 	MenuNode* MenuClickEvent::getNode()
 	{
 		return owner->getNode(id);
+	}
+	Point CheckBoxClickEvent::getCursorPoint()
+	{
+		return CursorPoint;
+	}
+	Point CheckBoxClickEvent::getCursorONForm()
+	{
+		return CursorONForm;
+	}
+	Point CheckBoxClickEvent::getCursorONCheckBox()
+	{
+		return CursorONCheckBox;
+	}
+	IControl* CheckBoxClickEvent::getOwner()
+	{
+		return owner;
 	}
 }
