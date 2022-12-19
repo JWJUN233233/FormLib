@@ -3,15 +3,15 @@
 #include "IControl.h"
 #include <CommCtrl.h>
 namespace FormLib {
-    class Progress :
+    class DLL Progress :
         public IControl
     {
         friend class Form;
     public:
         Progress(Point point, Size size, DWORD sytle = WS_CHILD | PBS_SMOOTH);
         void onCreate(HWND hwnd);
-        void Show();
-        void Hide();
+        void show();
+        void hide();
         void setPoint(Point point);
         void setSize(Size size);
         void setRange(int low, int high);
@@ -33,10 +33,13 @@ namespace FormLib {
         void setEnable(bool enable);
         bool isEnable();
         int getID();
+        HWND getHWND();
+        DWORD getSytle();
+        void setSytle(DWORD sytle);
         void setEventListener(EventProc Listener);
     private:
         void onFormCommand(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
-        void Destroy();
+        void destroy();
         HWND handle;
         PBRANGE range;
         int controlID;

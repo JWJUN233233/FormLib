@@ -1,7 +1,7 @@
-#ifndef POINT_H
-#define POINT_H
+#pragma once
+#include "pch.h"
 namespace DG_CoreLib{
-class Point
+class DLL Point
 {
 	public:
 		Point(int x, int y);
@@ -17,4 +17,3 @@ class Point
 		int _y;
 };
 }
-#endif

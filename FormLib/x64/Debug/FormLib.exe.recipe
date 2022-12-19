@@ -2,9 +2,6 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\Ddggd\Desktop\c++\FormLib\x64\Debug\DLogger.dll</FullPath>
-    </ProjectOutput>
-    <ProjectOutput>
       <FullPath>C:\Users\Ddggd\Desktop\c++\FormLib\x64\Debug\FormLib.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>

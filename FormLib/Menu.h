@@ -5,8 +5,8 @@
 #include "Form.h"
 #include <list>
 namespace FormLib {
-    class MenuNode;
-    class Menu : public IMenu
+    class DLL MenuNode;
+    class DLL Menu : public IMenu
     {
         friend class Form;
     public:
@@ -32,18 +32,25 @@ namespace FormLib {
         HMENU hmenu;
         std::list<MenuNode*> nodes;
     };
-    class MenuNode {
+    class DLL MenuNode {
         friend class Menu;
     public:
         MenuNode(HMENU parent,Achar* Text, DWORD sytle = MF_STRING, bool isPopupMenu = false);
         void setText(Achar* Text);
         void setPopupText(HMENU parent, Achar* Text);
+        void setIsCheckBox(bool isCheckBox);
+        bool isCheckBox();
+        void setIsCheck(bool isCheck);
+        bool isCheck();
+        void setEnable(bool isEnable);
+        bool isEnable();
         void getText(Achar* out);
         bool isPopupMenu();
         ~MenuNode();
     private:
         int id;
         bool IsPopupMenu;
+        bool IsCheckBox;
         HMENU parent;
         DWORD sytle;
         Achar* Text;

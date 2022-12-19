@@ -19,16 +19,16 @@ void FormLib::Progress::onCreate(HWND hwnd)
 		hwnd, (HMENU)NextControlid, GetModuleHandle(0), NULL);
 	controlID = NextControlid;
 	NextControlid++;
-	Show();
+	show();
 	setRange(0, 100);
 	setStep(10);
 }
-void FormLib::Progress::Show()
+void FormLib::Progress::show()
 {
 	ShowWindow(handle, SW_SHOW);
 	UpdateWindow(handle);
 }
-void FormLib::Progress::Hide()
+void FormLib::Progress::hide()
 {
 	ShowWindow(handle, SW_HIDE);
 	UpdateWindow(handle);
@@ -120,7 +120,7 @@ void FormLib::Progress::onFormCommand(HWND hwnd, UINT Message, WPARAM wParam, LP
 
 	}
 }
-void FormLib::Progress::Destroy()
+void FormLib::Progress::destroy()
 {
 	DestroyWindow(handle);
 }
@@ -140,6 +140,18 @@ bool FormLib::Progress::isEnable()
 int FormLib::Progress::getID()
 {
 	return controlID;
+}
+HWND FormLib::Progress::getHWND()
+{
+	return handle;
+}
+DWORD FormLib::Progress::getSytle()
+{
+	return GetWindowLong(handle, GWL_STYLE);
+}
+void FormLib::Progress::setSytle(DWORD sytle)
+{
+	SetWindowLong(handle, GWL_STYLE, sytle);
 }
 void FormLib::Progress::setEventListener(EventProc Listener)
 {

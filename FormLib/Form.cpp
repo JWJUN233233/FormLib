@@ -17,6 +17,7 @@ Form::Form(DG_CoreLib::Point location, DG_CoreLib::Size size, Achar* _Caption, D
 	Caption = _Caption;
 	smallIcon = NULL;
 	bigIcon = NULL;
+	/*focusControl = -1;*/
 	hwnd = CreateWindowEx(WS_EX_CLIENTEDGE,
 		_T("FormLib"),
 		Caption,
@@ -37,11 +38,11 @@ FormLib::Form::~Form()
 	DestroyWindow(hwnd);
 	hwnd_Form.erase(hwnd);
 }
-void Form::Show(){
+void Form::show(){
 	ShowWindow(hwnd, SW_SHOW);
 	UpdateWindow(hwnd);
 }
-void Form::Hide(){
+void Form::hide(){
 	SetWindowPos(hwnd,HWND_NOTOPMOST,
 	_point.GetX(),_point.GetY(),
 	_size.GetW(),_size.GetH(),SWP_HIDEWINDOW);
@@ -49,8 +50,12 @@ void Form::Hide(){
 void Form::Event(){
 	MSG Msg;
 	while(GetMessage(&Msg, NULL, 0, 0) > 0) {
-		TranslateMessage(&Msg);
-		DispatchMessage(&Msg);
+		if (!IsDialogMessage(hwnd, &Msg))
+		{
+			TranslateMessage(&Msg);
+
+			DispatchMessage(&Msg);
+		}
 	}
 }
 void FormLib::Form::setPoint(Point point)
@@ -69,7 +74,7 @@ Size FormLib::Form::getSize()
 {
 	return _size;
 }
-void Form::SetCaption(Achar* _Caption){
+void Form::setCaption(Achar* _Caption){
 	Caption = _Caption;
 }
 void FormLib::Form::addListener(FormListener _listener)
@@ -100,7 +105,7 @@ void FormLib::Form::removeControl(IControl* control)
 	if (control->getOwner() == NULL) {
 		return;
 	}
-	control->Destroy();
+	control->destroy();
 	control->setOwner(NULL);
 	controls.remove(control);
 }
@@ -112,11 +117,15 @@ void FormLib::Form::removePainter(Painter* painter)
 {
 	painters.remove(painter);
 }
-void FormLib::Form::ShowDialog(HWND dialog)
+void FormLib::Form::showDialog(HWND dialog)
 {
 }
-void FormLib::Form::ShowDialog(Form dialog)
+void FormLib::Form::showDialog(Form dialog)
 {
+}
+void FormLib::Form::flashWindow()
+{
+	FlashWindow(hwnd, true);
 }
 void FormLib::Form::setSytle(DWORD sytle)
 {
@@ -158,12 +167,12 @@ void FormLib::Form::setTaskBar(bool isenable)
 		SetWindowLong(hwnd, GWL_EXSTYLE, oldSytle | WS_EX_TOOLWINDOW);
 	}
 	else {
-		SetWindowLong(hwnd, GWL_EXSTYLE, oldSytle & WS_EX_TOOLWINDOW & NULL);
+		SetWindowLong(hwnd, GWL_EXSTYLE, oldSytle ^ WS_EX_TOOLWINDOW);
 	}
 }
 bool FormLib::Form::isShowInTaskBar()
 {
-	return GetWindowLong(hwnd, GWL_EXSTYLE) == WS_EX_TOOLWINDOW;
+	return GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_TOOLWINDOW;
 }
 Form* FormLib::Form::FromHWND(HWND hwnd)
 {
@@ -221,6 +230,32 @@ LRESULT FormLib::Form::WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lP
 		}
 		EndPaint(hwnd, &ps);
 		break;
+	case WM_KEYDOWN:
+		/*if (wParam == VK_TAB) {
+			focusControl++;
+			if (focusControl >= controls.size() - 1) {
+				focusControl = -1;
+				SetForegroundWindow(hwnd);
+				SetFocus(hwnd);
+			}
+			else {
+				int c = 0;
+				for (auto& i : controls) {
+					if (c == focusControl) {
+						i->onFormCommand(hwnd, SET_FOCUS, 0, 0);
+						SetForegroundWindow(hwnd);
+						SetFocus(i->getHWND());
+						break;
+					}
+					if (c + 1 == focusControl) {
+						i->onFormCommand(hwnd, KILL_FOCUS, 0, 0);
+						SetForegroundWindow(hwnd);
+					}
+					c++;
+				}
+			};
+		}*/
+		break;
 	case WM_COMMAND:
 		for (auto& i : controls) {
 			i -> onFormCommand(hwnd, Message, wParam, lParam);
@@ -236,7 +271,6 @@ LRESULT FormLib::Form::WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lP
 		break;
 	default:
 		return DefWindowProc(hwnd, Message, wParam, lParam);
-		break;
 	}
 	return 0;
 }

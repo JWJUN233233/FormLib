@@ -6,15 +6,15 @@
 #include "Form.h"
 #include <CommCtrl.h>
 namespace FormLib {
-    class Button :
+    class DLL Button :
         public IControl
     {
         friend class Form;
     public:
-        Button(Point point, Size size, DWORD sytle = BS_NOTIFY | WS_CHILD | BS_PUSHBUTTON);
+        Button(Point point, Size size, DWORD sytle = WS_CHILD | BS_PUSHBUTTON | BS_NOTIFY | WS_TABSTOP);
         void onCreate(HWND hwnd);
-        void Show();
-        void Hide();
+        void show();
+        void hide();
         void setPoint(Point point);
         void setSize(Size size);
         Point getPoint();
@@ -24,10 +24,13 @@ namespace FormLib {
         void setEnable(bool enable);
         bool isEnable();
         int getID();
+        HWND getHWND();
+        DWORD getSytle();
+        void setSytle(DWORD sytle);
         void setEventListener(EventProc Listener);
     private:
         void onFormCommand(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
-        void Destroy();
+        void destroy();
         HWND handle;
         int controlID;
         Point _point;

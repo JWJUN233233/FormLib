@@ -18,19 +18,19 @@
 #include "Menu.h"
 using namespace DG_CoreLib;
 namespace FormLib{
-class Form
+class DLL Form
 {
 	public:
 		Form(DG_CoreLib::Point location, DG_CoreLib::Size _size, Achar* _Caption = (Achar*)_T("Caption"), DWORD sytle = WS_OVERLAPPEDWINDOW);
 		~Form();
-		void Show();
-		void Hide();
-		static void Event();
+		void show();
+		void hide();
+		void Event();
 		void setPoint(Point point);
 		void setSize(Size size);
 		Point getPoint();
 		Size getSize();
-		void SetCaption(Achar* _Caption);
+		void setCaption(Achar* _Caption);
 		void addListener(FormListener _listener);
 		void setSmallIcon(HICON icon);
 		void setBigIcon(HICON icon);
@@ -38,8 +38,9 @@ class Form
 		void removeControl(IControl* control);
 		void addPainter(Painter* painter);
 		void removePainter(Painter* painter);
-		void ShowDialog(HWND dialog);
-		void ShowDialog(Form dialog);
+		void showDialog(HWND dialog);
+		void showDialog(Form dialog);
+		void flashWindow();
 		void setSytle(DWORD sytle);
 		void setMenu(IMenu* menu);
 		IMenu* getMenu();
@@ -61,6 +62,7 @@ class Form
 		std::list<FormListener> listeners;
 		std::list<IControl*> controls;
 		std::list<Painter*> painters;
+		/*int focusControl;*/
 		HICON smallIcon;
 		HICON bigIcon;
 };
