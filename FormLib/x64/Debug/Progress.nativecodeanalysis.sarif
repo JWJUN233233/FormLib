@@ -1,0 +1,91 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.32.31332.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/progress.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "9a202b0c0e5bb133277f701e08ad690ea95ed969b7a3e5294b8029b6a5b08e19"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/progress.h"
+          },
+          "hashes": {
+            "sha-256": "5f00fdcb35bab748f67c17c5405faf86f3d55a9869754b53b67c11ed319b67a1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/pch.h"
+          },
+          "hashes": {
+            "sha-256": "ba2402675fee2bad9ddbb132f3047899b4cf3d896ef8359ce68b6bbbbb30ea55"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/icolorfulout.h"
+          },
+          "hashes": {
+            "sha-256": "eb8b258f27633092c039190a8ad7aed0c0331633a5c782ceabae2372a03096ef"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/logger.h"
+          },
+          "hashes": {
+            "sha-256": "b40c807eb1da63a97efb44a2a26b0f68c91099918dc09a288f29cdfaa6fc9b53"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/icontrol.h"
+          },
+          "hashes": {
+            "sha-256": "a52774b819be84b2dae6c411cadd0d3b71cda1017244a19dd945fa2433ec2a06"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/point.h"
+          },
+          "hashes": {
+            "sha-256": "d76b15768d5cbc5ae7def8736575e9167db6c52b462c3bcabab33e8e69c4a29f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/size.h"
+          },
+          "hashes": {
+            "sha-256": "13cee058a4106ed0b6150c4e6fabcc7555012c1ec4fb4e2ef26be7332f2de07e"
+          }
+        }
+      ]
+    }
+  ]
+}

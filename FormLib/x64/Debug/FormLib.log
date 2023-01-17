@@ -1,0 +1,4 @@
+﻿  TextBox.cpp
+C:\Users\Ddggd\Desktop\c++\FormLib\TextBox.cpp(22,1): warning C4312: “类型强制转换”: 从“int”转换到更大的“HMENU”
+C:\Users\Ddggd\Desktop\c++\FormLib\TextBox.cpp(96,4): warning C4060: switch 语句没有包含“case”或“default”标签
+  FormLib.vcxproj -> C:\Users\Ddggd\Desktop\c++\FormLib\x64\Debug\FormLib.exe

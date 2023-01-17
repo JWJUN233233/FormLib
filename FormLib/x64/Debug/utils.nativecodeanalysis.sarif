@@ -1,0 +1,67 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.32.31332.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/utils.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "2ddc26d3954eadd775f01d6102288fb4949afde615972d722080d2aa58fb905b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/utils.h"
+          },
+          "hashes": {
+            "sha-256": "13e78a4bffd71a8457d50f1c111f49dac29ca3978ca36b8f4a0c4af44aad5ec4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/pch.h"
+          },
+          "hashes": {
+            "sha-256": "ba2402675fee2bad9ddbb132f3047899b4cf3d896ef8359ce68b6bbbbb30ea55"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/icolorfulout.h"
+          },
+          "hashes": {
+            "sha-256": "eb8b258f27633092c039190a8ad7aed0c0331633a5c782ceabae2372a03096ef"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/ddggd/desktop/c++/formlib/logger.h"
+          },
+          "hashes": {
+            "sha-256": "b40c807eb1da63a97efb44a2a26b0f68c91099918dc09a288f29cdfaa6fc9b53"
+          }
+        }
+      ]
+    }
+  ]
+}
